@@ -2,11 +2,11 @@ import java.util.ArrayList;
 // make abstract Employee  --> Access Modifier
 /*  name and id */
 abstract class Employee{
-	String name;
-	int id;
+	private String name;
+	private int id;
 	
 // Constructor
-	Employee(String name,int id){	
+	public Employee(String name,int id){	
 		this.name=name;
 		this.id=id;
 	     }
@@ -20,7 +20,7 @@ abstract class Employee{
 	    }
 	
 // Abstract Method
-	abstract double calculateSalary() ;
+	public abstract double calculateSalary() ;
 	
 // Override toString
 	@Override
@@ -34,14 +34,15 @@ abstract class Employee{
 /* Calculate MonthlySalary  */
 
 class FullTimeEmployee extends Employee{
-	double monthlySalary;
-	FullTimeEmployee(String name, int id, double monthlySalary) {
+	private double monthlySalary;
+	public FullTimeEmployee(String name, int id, double monthlySalary) {
 		super(name, id);
 		this.monthlySalary = monthlySalary;
 	}
 	
-	@Override 
-	double calculateSalary() {
+//Poly
+	@Override
+	public double calculateSalary() {
 		return monthlySalary;
 	}
 }
@@ -61,7 +62,7 @@ class PartTimeEmployee extends Employee{
 	}
 	
 	@Override
-	double calculateSalary() {
+	public double calculateSalary() {
 		return hourWorked*hourlyRate;
 	}
 }
@@ -70,8 +71,8 @@ class PartTimeEmployee extends Employee{
 /*  Arrange in Array and Add Employee        */
 
 class PayrollSystem {
-	ArrayList<Employee> employeeList;
-	PayrollSystem(){
+	private ArrayList<Employee> employeeList;
+	public PayrollSystem(){
 		employeeList = new ArrayList<>();
 	}
 	public void addEmployee(Employee employee) {
@@ -106,18 +107,18 @@ public class Manager {
 		PayrollSystem payrollSystem = new PayrollSystem();
 
 		 FullTimeEmployee emp1 = new FullTimeEmployee("Varun", 101, 5000.0);
+		 payrollSystem.addEmployee(emp1);
+		 
 	     PartTimeEmployee emp2 = new PartTimeEmployee("Bawa", 102, 30, 15.0);
-		
-		payrollSystem.addEmployee(emp1);
-		payrollSystem.addEmployee(emp2);
+	     payrollSystem.addEmployee(emp2);
 		
 		System.out.println("DataBase: ");
 		payrollSystem.displyEmployee();
 		
-		System.out.println("\nRemove: ");
-		payrollSystem.removeEmployee(0);
+		//Remove Employee on ID :
+		payrollSystem.removeEmployee(102);
 		
-		System.out.println("Total Employees :");
+		System.out.println("\nTotal Employees :");
 		payrollSystem.displyEmployee();
 	}
 }
